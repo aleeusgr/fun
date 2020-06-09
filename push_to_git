@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd ~/HDD/workshop/archive/snippets
+
+cp ~/HDD/workshop/autoMPG.ipynb autoMPG.ipynb
+cp ~/HDD/workshop/MNIST.ipynb MNIST.ipynb
+
+git add .
+git commit
+git push origin master
