@@ -6,5 +6,6 @@ cp ~/HDD/workshop/autoMPG.ipynb autoMPG.ipynb
 cp ~/HDD/workshop/MNIST.ipynb MNIST.ipynb
 
 git add .
-git commit
+read -p "enter commit message "  > git commit -m 
+# git commit -m 
 git push origin master
