@@ -3,6 +3,8 @@
 cd ~/HDD/workshop/archive/snippets
 
 git add .
-git commit -m < read -p "enter commit message "   
-# git commit -m 
+read -p "enter commit message:"
+git commit -m "$REPLY"
+# git commit 
+# rm com_mess
 git push origin master
