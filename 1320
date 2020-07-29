@@ -5,8 +5,8 @@
 
 set -uo pipefail  # set up root frame
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR # read IO and save?
-arch='$arch'
-REPO_URL="https://pkgbuild.com/~dvzrv/repo/$arch"
+
+REPO_URL="https://pkgbuild.com/~dvzrv/repo/\$arch"
 MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=GB&protocol=https&use_mirror_status=on"
 
 pacman -Sy --noconfirm pacman-contrib
