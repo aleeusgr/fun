@@ -73,7 +73,7 @@ mount "${part_boot}" /mnt/boot
 
 ### Install and configure the basic system ###
 cat >>/etc/pacman.conf <<EOF
-[linux-rt]
+[dvzrv]
 SigLevel = Optional TrustAll
 Server = $REPO_URL 
 EOF
