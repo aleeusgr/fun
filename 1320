@@ -83,7 +83,7 @@ genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
 cat >>/mnt/etc/pacman.conf <<EOF
-[linux-rt]
+[dvzrv]
 SigLevel = Optional TrustAll
 Server = $REPO_URL
 EOF
