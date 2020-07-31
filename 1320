@@ -80,7 +80,6 @@ EOF
 
 pacstrap /mnt base linux-rt linux-firmware 
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
-echo "${hostname}" > /mnt/etc/hostname
 
 cat >>/mnt/etc/pacman.conf <<EOF
 [dvzrv]
@@ -89,19 +88,25 @@ Server = $REPO_URL
 EOF
 
 arch-chroot /mnt #bootctl install
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
 
-cat <<EOF > /mnt/boot/loader/loader.conf
-default arch
+cat >>/etc/locale.gen << EOF
+en_US.UTF-8 UTF-8
+ru_RU.UTF-8 UTF-8
 EOF
 
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title    Arch Linux
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+locale-gen
+
+echo "${hostname}" > /mnt/etc/hostname
+
+cat >>/etc/hosts << EOF
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	 "${hostname}".localdomain	 "${hostname}"
 EOF
 
-echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+#echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
