@@ -113,12 +113,30 @@ arch-chroot /mnt chsh -s /usr/bin/zsh
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
-#TODO:
-#0. Debugging
-#1. Bootloader
-#1.1 WIFI!!
-#2. General recommendations
-#2.1 SSD optimization?
-#3. JACK, ProAudio
-#4. XORG, DE??
-#5. Software
+
+#MEMOS:
+#https://wiki.archlinux.org/index.php/Installation_guide
+#https://wiki.archlinux.org/index.php/General_recommendations
+#https://wiki.archlinux.org/index.php/Kernel
+#https://wiki.archlinux.org/index.php/Network_configuration
+#https://wiki.archlinux.org/index.php/Professional_audio
+#https://wiki.archlinux.org/index.php/JACK_Audio_Connection_Kit
+#https://wiki.archlinux.org/index.php/Xorg
+#ihttps://github.com/vishnubob/python-midi
+ 
+#APPS:
+#https://github.com/nodiscc/awesome-linuxaudio/
+#MIXXX
+#mididings // python midi
+#sampler
+#mixer
+#sequencer 
+#synth
+#Effect rack
+
+# Bells and Whistles:
+# Fast fourier transform visuals
+# Change partitioning to a more reasonable version. / = 30Gb
+# Autostart script: launch apps, scale GUIs (QT_SCALE_FACTOR=1.5 hydrogen), sort apps by workspace.
+# How to control system GUI with midi-controller? Navigate folders, select files. 
+
