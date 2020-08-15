@@ -90,7 +90,8 @@ SigLevel = Optional TrustAll
 Server = $REPO_URL
 EOF
 
-# arch-chroot /mnt #bootctl install
+arch-chroot /mnt 
+#bootctl install 
 
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 hwclock --systohc
@@ -117,6 +118,10 @@ arch-chroot /mnt chsh -s /usr/bin/bash
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
+
+pacman -S grub --noconfirm
+
+grub-install --target=i386-pc "${device}"
 
 #MEMOS:
 #https://wiki.archlinux.org/index.php/Installation_guide
