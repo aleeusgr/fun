@@ -6,7 +6,7 @@
 set -uo pipefail  # set up root frame
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR # read IO and save?
 
-REPO_URL="https://pkgbuild.com/~dvzrv/repo/\$arch/"
+REPO_URL="https://pkgbuild.com/~dvzrv/repo/\$arch/" #linux-rt
 MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=GB&protocol=https&use_mirror_status=on"
 
 pacman -Sy --noconfirm pacman-contrib
@@ -35,8 +35,10 @@ curl -s "$MIRRORLIST_URL" | \
 hostname=1320
 user=admin
 password=admin
-devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
-device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
+#devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
+#device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
+device=/dev/sda
+
 clear
 
 ### Set up logging ###
@@ -90,22 +92,22 @@ SigLevel = Optional TrustAll
 Server = $REPO_URL
 EOF
 
-arch-chroot /mnt 
+#arch-chroot /mnt 
 #bootctl install 
 
-ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Moscow /mnt/etc/localtime
 hwclock --systohc
 
-cat >>/etc/locale.gen << EOF
+cat >>/mnt/etc/locale.gen << EOF
 en_US.UTF-8 UTF-8
 ru_RU.UTF-8 UTF-8
 EOF
 
 locale-gen
 
-echo "${hostname}" > /etc/hostname
-
-cat >>/etc/hosts << EOF
+echo "${hostname}" > /mnt/etc/hostname
+  
+cat >>/mnt/etc/hosts << EOF
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	 "${hostname}".localdomain	 "${hostname}"
@@ -119,9 +121,10 @@ arch-chroot /mnt chsh -s /usr/bin/bash
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
 
-pacman -S grub --noconfirm
+#pacman -S grub b43-frimware --noconfirm
+#grub-install --target=i386-pc '/dev/sda/' 
 
-grub-install --target=i386-pc "${device}"
+
 
 #MEMOS:
 #https://wiki.archlinux.org/index.php/Installation_guide
@@ -132,6 +135,7 @@ grub-install --target=i386-pc "${device}"
 #https://wiki.archlinux.org/index.php/JACK_Audio_Connection_Kit
 #https://wiki.archlinux.org/index.php/Xorg
 #ihttps://github.com/vishnubob/python-midi
+#https://unix.stackexchange.com/questions/27050/how-to-start-an-application-on-a-different-workspace
  
 #APPS:
 #https://github.com/nodiscc/awesome-linuxaudio/
