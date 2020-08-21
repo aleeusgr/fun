@@ -51,7 +51,7 @@ timedatectl set-ntp true
 swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
 swap_end=$(( $swap_size + 129 + 1 ))MiB
 
-parted --script "${device}" -- mklabel gpt \
+parted --script "${device}" -- mklabel msdos \
   mkpart ESP fat32 1Mib 129MiB \
   set 1 boot on \
   mkpart primary linux-swap 129MiB ${swap_end} \
@@ -117,6 +117,7 @@ EOF
 
 arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/bash
+arch-chroot /mnt
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
