@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd ~/HDD/workshop/archive/snippets
-
-git add .
-read -p "enter commit message:"
-git commit -m "$REPLY"
-git push origin master
