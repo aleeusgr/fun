@@ -69,18 +69,7 @@
     initialPassword = "sa1om0n";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
-  home-manager.users.alex = { pkgs, ... }: {
-    home.packages = with pkgs; [ 
-      atool 
-      httpie 
-      calibre
-      zotero
-      brave 
-      hmatrix
-      blas
-      lapack
-    ];
-    programs.bash.enable = true;
+
   nixpkgs.config.allowUnfree = true;  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -91,19 +80,28 @@
     git
     xclip #used for ssh on gitlab
     wget
+    calibre
+    zotero
+    nodejs
     python
     tldr 
     zoom
     vlc
     ntfs3g
     firefox
+    brave 
     # for https://github.com/rodolfomiranda/sidetree-cardano
     #mongodb
     #ipfs
     #
     stylish-haskell #haskell code formatter	
+    obsidian #try knowledge management tools
+    #for hmatrix
+    blas
+    lapack
     stack #for https://github.com/aleeusgr/open-games-hs
     # for prisma and redwoodjs
+    #glibc
     yarn
     direnv
     nix-direnv
