@@ -74,22 +74,6 @@
       atool 
       httpie 
 
-      graphviz #needed for calligraphy
-      calibre
-      zotero
-      brave 
-      zoom
-      vlc
-      blas
-      lapack
-      # for https://github.com/rodolfomiranda/sidetree-cardano
-      #mongodb
-      #ipfs
-      #
-      # for prisma and redwoodjs
-      yarn
-      direnv
-      nix-direnv
     ];
     programs.bash.enable = true;
   };
@@ -108,6 +92,18 @@
     tldr 
     ntfs3g
     firefox
+
+    graphviz #needed for calligraphy
+    calibre
+    zotero
+    brave 
+    zoom
+    vlc
+    discord
+    zoom-us
+    #hmatrix dependencies
+    blas
+    lapack
 
     stylish-haskell #haskell code formatter	
     stack #for https://github.com/aleeusgr/open-games-hs
@@ -169,9 +165,9 @@
     binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
 package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
     extraOptions = ''
-	keep-outputs = true
-        keep-derivations = true
+    	keep-outputs = true
+      keep-derivations = true
     	experimental-features = nix-command flakes
-    '';
+      '';
   };
 }
