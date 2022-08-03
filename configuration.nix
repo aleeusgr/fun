@@ -75,7 +75,17 @@
       httpie 
 
     ];
-    programs.bash.enable = true;
+    #programs.bash.enable = true;
+    programs.bash = {
+    enable = true;
+    profileExtra = ''
+      if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+          __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+          GIT_PROMPT_ONLY_IN_REPO=1
+          source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+      fi
+    '';
+  };
   };
   home-manager.useGlobalPkgs = true;
   nixpkgs.config.allowUnfree = true;  
