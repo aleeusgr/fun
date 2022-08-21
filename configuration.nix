@@ -66,7 +66,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alex = {
     isNormalUser = true;
-    initialPassword = "sa1om0n";
+    #remeber to set pwd
+    initialPassword = "password";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
   home-manager.users.alex = { pkgs, ... }: {
@@ -101,8 +102,10 @@
     tldr 
     ntfs3g
     firefox
+    obsidian
 
-    graphviz #needed for calligraphy
+    #graphviz #needed for calligraphy
+    #julia
     calibre
     zotero
     brave 
@@ -170,13 +173,13 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
   nix = {
-    binaryCaches          = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
-    binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
-package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
-    extraOptions = ''
-    	keep-outputs = true
-      keep-derivations = true
-    	experimental-features = nix-command flakes
-      '';
+    #binaryCaches          = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
+    #binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
+    #package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
+    #extraOptions = ''
+    #	keep-outputs = true
+    #  keep-derivations = true
+    #	experimental-features = nix-command flakes
+    #  '';
   };
 }
