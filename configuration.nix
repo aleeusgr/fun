@@ -22,6 +22,7 @@
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Africa/Cairo";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -42,7 +43,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  virtualisation.docker.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -66,11 +67,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alex = {
     isNormalUser = true;
-    #remeber to set pwd
     initialPassword = "password";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
   };
   home-manager.users.alex = { pkgs, ... }: {
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
     home.packages = with pkgs; [ 
       atool 
       httpie 
@@ -103,9 +105,7 @@
     ntfs3g
     firefox
     obsidian
-
-    #graphviz #needed for calligraphy
-    #julia
+    yarn
     calibre
     zotero
     brave 
@@ -113,10 +113,13 @@
     vlc
     discord
     zoom-us
+    pre-commit
     #hmatrix dependencies
     blas
     lapack
+    docker-compose
 
+    hlint
     stylish-haskell #haskell code formatter	
     stack #for https://github.com/aleeusgr/open-games-hs
     # https://jkuokkanen109157944.wordpress.com/2020/11/10/creating-a-haskell-development-environment-with-lsp-on-nixos/
@@ -173,13 +176,13 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
   nix = {
-    #binaryCaches          = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
-    #binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
-    #package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
-    #extraOptions = ''
-    #	keep-outputs = true
-    #  keep-derivations = true
-    #	experimental-features = nix-command flakes
-    #  '';
+    binaryCaches          = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
+    binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
+    package = pkgs.nixFlakes; # or versioned attributes like nixVersions.nix_2_8
+    extraOptions = ''
+    	keep-outputs = true
+        keep-derivations = true
+    	experimental-features = nix-command flakes
+      '';
   };
 }
