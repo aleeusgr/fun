@@ -71,6 +71,7 @@
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
   };
   home-manager.users.alex = { pkgs, ... }: {
+    #this caused trouble? 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
     home.packages = with pkgs; [ 
@@ -105,7 +106,7 @@
     ntfs3g
     firefox
     obsidian
-    yarn
+    yarn #??
     calibre
     zotero
     brave 
@@ -117,8 +118,9 @@
     #hmatrix dependencies
     blas
     lapack
-    docker-compose
-
+    docker-compose #do I need this?
+    
+    #Haskell
     hlint
     stylish-haskell #haskell code formatter	
     stack #for https://github.com/aleeusgr/open-games-hs
@@ -126,9 +128,10 @@
     ghc
     cabal2nix
     cabal-install
-    nodejs # For coc-nvim
+    nodejs # coc-nvim depends 
     haskellPackages.haskell-language-server
     haskellPackages.calligraphy
+
     (neovim.override {
       configure = {
         packages.myPlugins = with pkgs.vimPlugins; {
