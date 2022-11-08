@@ -68,7 +68,7 @@
   #nix.settings.experimental-features = [ "nix-command" "flakes" ];
   users.users.alex = {
     isNormalUser = true;
-    initialPassword = "sa1om0n";
+    initialPassword = "pwd";
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
   };
   home-manager.users.alex = { pkgs, ... }: {
