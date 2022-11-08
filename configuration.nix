@@ -65,15 +65,15 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  #nix.settings.experimental-features = [ "nix-command" "flakes" ];
   users.users.alex = {
     isNormalUser = true;
-    initialPassword = "password";
+    initialPassword = "sa1om0n";
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
   };
   home-manager.users.alex = { pkgs, ... }: {
-    #this caused trouble? 
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
+    #programs.direnv.enable = true;
+    #programs.direnv.nix-direnv.enable = true;
     home.packages = with pkgs; [ 
       atool 
       httpie 
@@ -106,7 +106,7 @@
     ntfs3g
     firefox
     obsidian
-    yarn #??
+    yarn
     calibre
     zotero
     brave 
@@ -118,9 +118,8 @@
     #hmatrix dependencies
     blas
     lapack
-    docker-compose #do I need this?
-    
-    #Haskell
+    docker-compose
+
     hlint
     stylish-haskell #haskell code formatter	
     stack #for https://github.com/aleeusgr/open-games-hs
@@ -128,10 +127,9 @@
     ghc
     cabal2nix
     cabal-install
-    nodejs # coc-nvim depends 
+    nodejs # For coc-nvim
     haskellPackages.haskell-language-server
     haskellPackages.calligraphy
-
     (neovim.override {
       configure = {
         packages.myPlugins = with pkgs.vimPlugins; {
